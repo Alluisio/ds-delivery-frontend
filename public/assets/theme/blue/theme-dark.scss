@@ -1,0 +1,14 @@
+$primaryColor: #D2AE6D;
+
+$primaryLightColor: #EECE96 !default;
+$primaryDarkColor: #97763B !default;
+$primaryDarkerColor: scale-color($primaryDarkColor, $lightness: -10%) !default;
+$primaryTextColor: #2e2e2e;
+// $defaultBlackColor: #403F44;
+// $defaultWhiteColor: #FFFFFF;
+
+$highlightBg: rgba(144, 202, 249, 0.16);
+$highlightTextColor: rgba(255,255,255,.87);
+
+@import '../../sass/theme/_theme_dark';
+// linear-gradient(to bottom, #EFDA64, #F9D714, #D9A522)

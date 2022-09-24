@@ -1,0 +1,30 @@
+.container-main {
+  display: flex;
+  flex:1;
+  flex-direction: row;
+  width: 100%;
+
+  .content-left {
+    width: 50%;
+
+     .text-faca-pedido {
+    color: #263238;
+    font-size: 55px;
+    font-weight: bold;
+    
+    
+  }
+
+  .text-escolha {
+    color: #9E9E9E;
+  }
+    
+  }
+
+  .content-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+}

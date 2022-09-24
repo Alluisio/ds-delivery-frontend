@@ -1,0 +1,191 @@
+.signin-container {
+  height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: stretch;
+
+  font-family: $fontFamily;
+
+  .content-login {
+    margin-top: -100px;
+  }
+  
+  .signin-background-image {
+    max-width: 738px;
+    max-height: 700px;
+    margin: auto;
+  }
+
+  .signin-content {
+    display: flex;
+    flex-direction: column;
+  
+    align-items: center;
+    place-content: center;
+  
+    width: 100%;
+    max-width: 450px;
+
+    background: $signInContentBackgroundColor;
+    color: $signInContentColor;
+
+    .link {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .animationContainer {
+      display: flex;
+      flex-direction: column;
+    
+      align-items: center;
+      place-content: center;
+    
+      animation: appearFromLeft 1s;
+
+      .signin-logo-area {
+        display: flex;
+        align-items: center;
+        flex-direction: column;        
+
+        .image-logo {
+          width: 152px;
+          height: 152px;
+        }
+        .signin-logo-area-text {
+          // font-family: 'engraversgothic', sans-serif;
+          font-size: 32px;
+          // background: -webkit-linear-gradient($primaryLightColor, $primaryColor, $primaryDarkColor);
+          // -webkit-background-clip: text;
+          // -webkit-text-fill-color: transparent;
+        }
+      }
+    
+      
+
+      .link-ajuda {
+        font-size: 12px;
+      }
+    
+      form {
+        margin: 80px 0;
+        width: 340px;
+        text-align: center;
+    
+        h1 {
+          margin-bottom: 24px;
+          color: #7c804e;
+        }
+    
+        a {
+          color: #7c804e;
+          display: block;
+          margin-top: 24px;
+          text-decoration: none;
+          transition: color 0.2s;
+    
+          &:hover {
+            color: "#7c804e";
+          }
+        }
+      }
+    
+      .focus {
+        color: #0eb0e5;
+      }
+    
+      > a {
+        color: #ee7258;
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+        text-decoration: none;
+        transition: color 0.2s;
+    
+        &:hover {
+          color: "#ee7258";
+        }
+    
+        svg {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+
+  .background {
+    position: absolute;
+  
+    color: $primaryColor;
+  
+    &__name-version {
+      margin-left: 500px;
+      margin-top: 63px;
+      letter-spacing: 2.5px;
+      width: 350px;
+
+      .alignRight {
+        display: flex;
+        flex-direction: column;
+
+        .dashboard-card-title {
+          font-family: "engraversgothic", sans-serif;
+          color: $primaryColor;
+          font-size: 63px;
+        }
+        
+      }
+    }
+  
+    &__esgi {
+      font-size: 25px;
+      text-align: left;
+    }
+  
+
+  
+    &__version {
+      text-align: right;
+      font-size: 25px;
+    }
+    label {
+      color: orange;
+    }
+
+
+  }
+
+  .signin-close-error-button{
+    width: 25px !important;
+    height: 25px !important;
+
+    .p-button-icon {
+      font-size: 0.75rem !important; 
+    }
+  }
+
+}
+
+@keyframes appearFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+

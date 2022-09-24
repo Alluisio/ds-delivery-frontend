@@ -1,0 +1,46 @@
+.p-breadcrumb {
+    background: $breadcrumbBg;
+    border: $breadcrumbBorder;
+    border-radius: $borderRadius;
+    padding: $breadcrumbPadding;
+
+    ul {
+        li {
+            .p-menuitem-link {
+                transition: $listItemTransition;
+                border-radius: $borderRadius;
+
+                &:focus {
+                    @include focused();
+                }
+
+                .p-menuitem-text {
+                    color: $breadcrumbItemTextColor;
+                    text-decoration: $breadcrumbItemTextDecoration
+                }
+
+                .p-menuitem-icon {
+                    color: $breadcrumbItemIconColor;
+                }
+            }
+
+            &.p-breadcrumb-chevron {
+                margin: 0 $inlineSpacing 0 $inlineSpacing;
+                color: $breadcrumbSeparatorColor;
+                font-size: $breadcrumbSeparatorFontSize;
+            }
+
+            &:last-child {
+                .p-menuitem-text {
+                    color: $breadcrumbLastItemTextColor;
+                    text-decoration: $breadcrumbItemTextDecoration
+                }
+
+                .p-menuitem-icon {
+                    color: $breadcrumbLastItemIconColor;
+                    
+                }
+            }
+        }
+    }
+}

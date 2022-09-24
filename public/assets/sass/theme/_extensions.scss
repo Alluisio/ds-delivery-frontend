@@ -1,0 +1,247 @@
+.p-carousel {
+  .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+    background-color: $primaryColor;
+  }
+}
+
+.p-galleria {
+  .p-galleria-indicators .p-galleria-indicator.p-highlight button {
+    background-color: $primaryColor;
+  }
+}
+
+.text-font-family {
+  font-family: $fontFamily;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  label {
+    font-family: $fontFamily;
+  }
+}
+
+.balandrau-gradient-text {
+  font-family: "engraversgothic", sans-serif;
+  // font-size: 32px;
+  background: -webkit-linear-gradient($primaryLightColor, $primaryColor, $primaryDarkColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.copiar-link-container {
+  cursor: pointer;
+  color: $primaryColor;
+}
+
+.color-link {
+  color: $primaryLightColor;
+  text-decoration: underline;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.svg-icon {
+  // width: 20px;
+  height: auto;
+  margin-right: 7px;
+  font-size: 20px;
+}
+
+.flex-expand-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-align {
+  text-align: center !important;
+  margin: 0 auto;
+  vertical-align: middle;
+}
+
+.left-align {
+  text-align: left !important;
+  vertical-align: middle;
+}
+
+// $datatableActionPanelBackgroundColor: $actionPanelBackgroundColor;
+// $datatableActionPanelColor: $actionPanelColor;
+
+// .datatable-action-panel {
+//   border-top-left-radius: 5px;
+//   border-top-right-radius: 5px;
+//   background-color: $datatableActionPanelBackgroundColor;
+//   color: $datatableActionPanelColor;
+//   padding: 0 20px 10px;
+
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   &__items {
+//     align-items: center;
+//     align-content: center;
+//     justify-content: center;
+//     align-self: flex-end;
+//   }
+// }
+
+// .container-detalhes {
+//   .p-row-toggler {
+//     width: 25px !important;
+//     height: 25px !important;
+
+//     .pi-chevron-down:before {
+//       content: "\e903";
+//     }
+//     .pi-chevron-right:before {
+//       content: "\e902";
+//     }
+//   }
+
+//   .p-link {
+//     box-shadow: none !important;
+//   }
+// }
+
+// .paginator-right-content{
+//   margin-left: auto !important;
+// }
+
+// .borda-arredondada-imagem {
+//   width: 70%;
+//   height: auto;
+//   border-radius: 20px;
+//   border: 1px $instrumentoFormImagemBorderColor solid;
+//   padding: 7px;
+// }
+
+// .datatable-item-editor {
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex: 1;
+//   height: 40px;
+//   width: 100%;
+//   // border: 0;
+//   border-radius: 7px;
+//   overflow: hidden;
+// }
+
+.padding-16 {
+  padding: 16px;
+}
+
+.avatares-grupos-de-acesso-usuario {
+  display: flex;
+}
+
+.avatar-container {
+  background: $avatarContainerBg;
+  color: $avatarContainerColor;
+  font-family: "Colonna MT", regular;
+  font-size: 2rem !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.debug-red {
+  border: solid 1px red;
+}
+
+.debug-green {
+  border: solid 1px green;
+}
+
+.debug-blue {
+  border: solid 1px blue;
+}
+
+.input-button-aligned-center {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  // margin-top: auto;
+
+  .p-button-icon {
+    margin-right: 18px;
+  }
+  .p-button-label {
+    flex: unset;
+    line-height: 16px;
+  }
+}
+
+.operation-button {
+  height: 64px;
+  width: 40% !important;
+  min-width: 150px;
+}
+
+.background-verde-situacao {
+  @include operation-button($verdeSituacao, !important);
+}
+
+.background-vermelho-situacao {
+  // background: unset;
+  // background-color: $vermelhoSituacao !important;
+  @include operation-button($vermelhoSituacao, !important);
+}
+
+.header-h1-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: $menuH2TextColor;
+}
+
+.default-dialog-header {
+  margin-left: 32px;
+  padding-bottom: 12px;
+  border-bottom: solid 1px $primaryLightColor;
+}
+
+.default-dialog-content {
+  margin-left: 32px;
+}
+
+.confirm-dialog-text {
+  font-size: $fontSize;
+  line-height: calc($fontSize + 4px);
+
+  // color: #fff;
+  &-bold {
+    color: #fff;
+    font-weight: bold;
+    // text-decoration: underline;
+  }
+}
+
+.ba-edit-note {
+  margin-top: -7px;
+}
+
+.color-branco {
+  color: #fff !important;
+}
+.p-input-icon-right > i:last-of-type,
+.p-input-icon-right > svg:last-of-type,
+.p-input-icon-right > .p-input-suffix {
+  right: 0.75rem;
+}
+
+.without-arrows {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

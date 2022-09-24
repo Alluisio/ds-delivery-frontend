@@ -1,0 +1,204 @@
+
+@font-face {
+    font-family: "balandrau-icons";
+    src: url("/assets/icons/fonts/balandrau-icons.ttf?eafd52004a997571537eda3da91e8a9c") format("truetype"),
+url("/assets/icons/fonts/balandrau-icons.woff?eafd52004a997571537eda3da91e8a9c") format("woff"),
+url("/assets/icons/fonts/balandrau-icons.woff2?eafd52004a997571537eda3da91e8a9c") format("woff2"),
+url("/assets/icons/fonts/balandrau-icons.eot?eafd52004a997571537eda3da91e8a9c#iefix") format("embedded-opentype");
+}
+
+span[class^="ba-"]:before, span[class*=" ba-"]:before, i[class^="ba-"]:before, i[class*=" ba-"]:before {
+    font-family: balandrau-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+}
+
+.ba-acessorios:before {
+    content: "\f101";
+}
+.ba-adicionar-imagem:before {
+    content: "\f102";
+}
+.ba-anterior:before {
+    content: "\f103";
+}
+.ba-books:before {
+    content: "\f104";
+}
+.ba-capacidade:before {
+    content: "\f105";
+}
+.ba-certificado:before {
+    content: "\f106";
+}
+.ba-codigo:before {
+    content: "\f107";
+}
+.ba-concluido:before {
+    content: "\f108";
+}
+.ba-data-calibracao:before {
+    content: "\f109";
+}
+.ba-data:before {
+    content: "\f10a";
+}
+.ba-detalhes:before {
+    content: "\f10b";
+}
+.ba-duracao-servico:before {
+    content: "\f10c";
+}
+.ba-edit-note:before {
+    content: "\f10d";
+}
+.ba-editar:before {
+    content: "\f10e";
+}
+.ba-email:before {
+    content: "\f10f";
+}
+.ba-empresa:before {
+    content: "\f110";
+}
+.ba-emprestimo:before {
+    content: "\f111";
+}
+.ba-excluir:before {
+    content: "\f112";
+}
+.ba-fabricante:before {
+    content: "\f113";
+}
+.ba-faturamento:before {
+    content: "\f114";
+}
+.ba-filtro:before {
+    content: "\f115";
+}
+.ba-funil:before {
+    content: "\f116";
+}
+.ba-grafico:before {
+    content: "\f117";
+}
+.ba-hora:before {
+    content: "\f118";
+}
+.ba-identificacao:before {
+    content: "\f119";
+}
+.ba-imagem:before {
+    content: "\f11a";
+}
+.ba-info:before {
+    content: "\f11b";
+}
+.ba-instrumento-padrao:before {
+    content: "\f11c";
+}
+.ba-instrumento-referencia:before {
+    content: "\f11d";
+}
+.ba-instrumento:before {
+    content: "\f11e";
+}
+.ba-laboratorio-interno:before {
+    content: "\f11f";
+}
+.ba-laboratorio:before {
+    content: "\f120";
+}
+.ba-listagem-branco:before {
+    content: "\f121";
+}
+.ba-listagem:before {
+    content: "\f122";
+}
+.ba-localizacao:before {
+    content: "\f123";
+}
+.ba-menu:before {
+    content: "\f124";
+}
+.ba-modelo:before {
+    content: "\f125";
+}
+.ba-mover-filtro:before {
+    content: "\f126";
+}
+.ba-nome-fantasia:before {
+    content: "\f127";
+}
+.ba-observacoes:before {
+    content: "\f128";
+}
+.ba-orcamentos:before {
+    content: "\f129";
+}
+.ba-ordem-de-servico-azul:before {
+    content: "\f12a";
+}
+.ba-ordem-de-servico:before {
+    content: "\f12b";
+}
+.ba-ordenacao:before {
+    content: "\f12c";
+}
+.ba-patrimonio:before {
+    content: "\f12d";
+}
+.ba-pen-tool:before {
+    content: "\f12e";
+}
+.ba-periodo:before {
+    content: "\f12f";
+}
+.ba-pesquisa:before {
+    content: "\f130";
+}
+.ba-proximo:before {
+    content: "\f131";
+}
+.ba-rastreabilidade:before {
+    content: "\f132";
+}
+.ba-razao-social:before {
+    content: "\f133";
+}
+.ba-rbc:before {
+    content: "\f134";
+}
+.ba-remover-imagem:before {
+    content: "\f135";
+}
+.ba-responsavel:before {
+    content: "\f136";
+}
+.ba-sair:before {
+    content: "\f137";
+}
+.ba-senha:before {
+    content: "\f138";
+}
+.ba-serie:before {
+    content: "\f139";
+}
+.ba-situacao:before {
+    content: "\f13a";
+}
+.ba-tipo:before {
+    content: "\f13b";
+}
+.ba-usuario:before {
+    content: "\f13c";
+}
+.ba-web:before {
+    content: "\f13d";
+}
