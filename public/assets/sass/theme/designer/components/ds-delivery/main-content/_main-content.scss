@@ -1,3 +1,5 @@
 .main-content {
   min-height: calc(100vh - 60px - 40px);
+  display: flex;
+  flex: 1;
 } 

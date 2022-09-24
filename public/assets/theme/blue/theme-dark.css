@@ -226,6 +226,8 @@
 }
 .main-content {
   min-height: calc(100vh - 60px - 40px);
+  display: flex;
+  flex: 1;
 }
 
 .container-main {
@@ -239,16 +241,20 @@
 }
 .container-main .content-left .text-faca-pedido {
   color: #263238;
-  font-size: 55px;
+  font-size: 3.5rem;
   font-weight: bold;
 }
 .container-main .content-left .text-escolha {
   color: #9E9E9E;
+  font-size: 1.3rem;
 }
 .container-main .content-right {
   width: 50%;
   display: flex;
   justify-content: center;
+}
+.container-main .content-right img {
+  width: 70%;
 }
 
 .p-autocomplete .p-autocomplete-loader {
