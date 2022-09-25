@@ -1,14 +1,14 @@
-$primaryColor: #D2AE6D;
+$primaryColor: #FF5371;
 
-$primaryLightColor: #EECE96 !default;
-$primaryDarkColor: #97763B !default;
+$primaryLightColor: #FF6E86 !default;
+$primaryDarkColor: #B32940 !default;
 $primaryDarkerColor: scale-color($primaryDarkColor, $lightness: -10%) !default;
-$primaryTextColor: #2e2e2e;
+$primaryTextColor: #FFFFFF;
 // $defaultBlackColor: #403F44;
 // $defaultWhiteColor: #FFFFFF;
 
-$highlightBg: rgba(144, 202, 249, 0.16);
-$highlightTextColor: rgba(255,255,255,.87);
+$highlightBg:rgba(255,255,255,.87);
+$highlightTextColor: rgba(144, 202, 249, 0.16);
 
 @import '../../sass/theme/_theme_dark';
 // linear-gradient(to bottom, #EFDA64, #F9D714, #D9A522)

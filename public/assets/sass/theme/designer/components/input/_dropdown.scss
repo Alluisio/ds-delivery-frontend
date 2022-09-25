@@ -1,8 +1,10 @@
 .p-dropdown {
-    background: $inputBg;
+    background: $bgDropdown;
     border: $inputBorder;
     transition: $formElementTransition;
     border-radius: $borderRadius;
+    font-size: $fontSize;
+    height: 34px;
 
     &:not(.p-disabled):hover {
         border-color: $inputHoverBorderColor;
@@ -19,12 +21,15 @@
     }
 
     .p-dropdown-label {
-        background: transparent;
+        background: $bgDropdown;
         border: 0 none;
 
         &.p-placeholder {
-          opacity: $placeHolderOpacity;
-          font-style: $placeHolderFontStyle;
+          opacity: 1;
+          font-size: $fontSize;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-style: normal;
         }
 
         &:enabled:focus {
@@ -54,9 +59,13 @@
 .p-dropdown-panel {
     background: $inputOverlayBg;
     color: $inputListTextColor;
-    border: $inputOverlayBorder;
-    border-radius: $borderRadius;
-    box-shadow: $inputOverlayShadow;
+    border: 0px;
+    // border-radius: 0px 0px $borderRadius $borderRadius; 
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+    // box-shadow: $inputOverlayShadow;
 
     .p-dropdown-header {
         padding: $inputListHeaderPadding;

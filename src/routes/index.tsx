@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import MainContainer from "../components/MainContainer";
 import Home from "../pages/Home";
+import Options from "../pages/Options";
 import SignIn from "../pages/SignInPage";
 
 // import SignIn from "../pages/SignInPage";
@@ -18,6 +19,7 @@ const RoutesComponent: React.FC = () => {
         return (
           <>
             <Route path="/" element={<Home />} />
+            <Route path="/options" element={<Options />} />
           </>
         );
       }

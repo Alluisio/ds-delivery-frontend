@@ -1,8 +1,11 @@
 import { Button } from "primereact/button";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import entregador from "../../assets/img/entregador.svg";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="grid grid-nogutter col-10 col-offset-1 container-main align-items-center  ">
       <div className="content-left">
@@ -10,7 +13,12 @@ const Home: React.FC = () => {
           <p className="text-faca-pedido">Faça seu pedido que entregamos para você!!!</p>
         </div>
         <p className="text-escolha mb-5">Escolha o seu pedido e em poucos minutos levaremos na sua porta</p>
-        <Button label="FAZER PEDIDO" onClick={() => {}} />
+        <Button
+          label="FAZER PEDIDO"
+          onClick={() => {
+            navigate("options");
+          }}
+        />
       </div>
       <div className="content-right">
         <img src={entregador} alt="entregador em uma moto" />

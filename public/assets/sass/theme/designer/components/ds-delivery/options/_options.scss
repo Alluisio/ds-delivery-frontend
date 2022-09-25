@@ -1,0 +1,44 @@
+.options-content {
+  display: flex;
+  flex-direction: column;
+
+  .category-text {
+      color: #FF5371;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+  .follow-steps-container {
+    display: flex;
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+
+      .step-container {
+        display: flex;
+        font-size: 1.1rem;
+        color: #9E9E9E;
+
+        &:first-child {
+          margin-bottom: 12px;
+        }
+
+        &> p:first-child {
+          color: #FF5371;
+          font-weight: bold;
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+
+  .filters {
+    display: flex;
+    align-items: center;
+
+    .input-text-container {
+      margin-left: 20px;
+    }
+  }
+}

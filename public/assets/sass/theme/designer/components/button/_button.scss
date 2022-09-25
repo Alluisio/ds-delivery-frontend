@@ -1,7 +1,7 @@
 .p-button {
     color: $buttonTextColor;
     background: $buttonBg;
-    background-image: $buttonBgImg;
+    background-image: transparent;
     border: $buttonBorder;
     padding: $buttonPadding;
     font-size: $fontSize;
@@ -11,7 +11,7 @@
 
     &:enabled:hover {
         background: $buttonHoverBg;
-        background-image: $buttonHoverBgImg;
+        background-image: transparent;
         color: $buttonTextHoverColor;
         border-color: $buttonHoverBorderColor;
     }

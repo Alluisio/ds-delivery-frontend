@@ -1,10 +1,20 @@
-//shades
-$shade000: rgba(255, 255, 255, 0.87) !default; //text color
-$shade100: rgba(255, 255, 255, 0.6) !default; //text secondary color
-$shade600: #383838 !default; //input bg, border, divider
-$shade700: #2b2b2b !default; //unused
-$shade800: #1e1e1e !default; //elevated surface
-$shade900: #121212 !default; //ground surface
+// //shades
+// $shade000: rgba(255, 255, 255, 0.87) !default; //text color
+// $shade100: rgba(255, 255, 255, 0.6) !default; //text secondary color
+// $shade600: #383838 !default; //input bg, border, divider
+// $shade700: #2b2b2b !default; //unused
+// $shade800: #1e1e1e !default; //elevated surface
+// $shade900: #121212 !default; //ground surface
+$shade000: #ffffff !default; //surface
+$shade100: #e4e4e4 !default; //header background
+$shade200: #e9ecef !default; //hover background
+$shade300: #dee2e6 !default; //border, divider
+$shade400: #ced4da !default; //input border
+$shade500: #adb5bd !default; //input icon
+$shade600: #6c757d !default; //text secondary color
+$shade700: #4b4b4b !default; //text color
+$shade800: #343a40 !default; //unused
+$shade900: #212529 !default; //unused
 
 //cores ipdec
 $azul-1: #50bde1;
@@ -167,7 +177,7 @@ $dadosCalibracaoDataTableInternoHeaderBackgroundColor: #3a3a3a;
 $dadosCalibracaoDataTableInternoItemBackgroundColor: #2b2b2b;
 $dadosCalibracaoDataTableDisabledItem: rgba(78, 78, 78, 0.75) !important;
 
-$hoverBg: rgba(255, 255, 255, 0.05) !default;
+$hoverBg: #737373 !default;
 $input-editor-inline-border: 1px solid $border-color-padrao;
 
 /* Profano */
@@ -248,17 +258,17 @@ $previsto: $amareloSituacao;
 $recebido: $verdeSituacao;
 $erro: $vermelhoSituacao;
 
-$placeHolderOpacity: 0.5;
-$placeHolderFontStyle: italic;
+$placeHolderOpacity: 1;
+$placeHolderFontStyle: normal;
 
 //global
-$fontFamily: 'Lato', sans-serif;
-$fontSize: 0.75rem !default;
+$fontFamily: 'Lato', sans-serif !default;
+$fontSize: 0.9rem !default;
 $fontWeight: normal !default;
 $textColor: $shade000 !default;
 $textSecondaryColor: $shade100 !default;
 $borderRadius: 7px !default;
-$transitionDuration: 0.2s !default;
+$transitionDuration: 0.5s !default;
 $formElementTransition: background-color $transitionDuration, color $transitionDuration,
   border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
@@ -296,18 +306,21 @@ $actionIconBorderRadius: 50% !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.5rem !default;
-$inputTextFontSize: 0.75rem !default;
-$inputBg: $cinza-input !default;
-$inputTextColor: $cinza-claro !default;
-$inputIconColor: $shade100 !default;
-$inputBorder: 1px solid $shade600 !default;
+$inputTextFontSize: 0.8rem !default;
+$inputBg: $primaryColor !default;
+$inputTextColor: $branco-puro !default;
+$inputIconColor: $branco-puro !default;
+$inputBorder: 0.5px solid $shade400 !default;
 $inputHoverBorderColor: $primaryColor !default;
 $inputFocusBorderColor: $primaryColor !default;
 $inputErrorBorderColor: $errorColor !default;
-$inputPlaceholderTextColor: $shade100 !default;
+$inputPlaceholderTextColor: $branco-puro !default;
 $inputFilledBg: $shade600 !default;
 $inputFilledHoverBg: $inputFilledBg !default;
 $inputFilledFocusBg: $inputFilledBg !default;
+
+$bgDropdown: $primaryColor;
+$dropdownPadding: 0.3rem 0.5rem !default;
 
 //balandrau datatable input border
 $datatableInputBorder: solid 1px $border-color-padrao;
@@ -319,13 +332,13 @@ $inputGroupTextColor: $shade100 !default;
 $inputGroupAddOnMinWidth: 2.357rem !default;
 
 //input lists (e.g. dropdown, autocomplete, multiselect, orderlist)
-$inputListBg: $shade800 !default;
+$inputListBg: $branco-gelo !default;
 $inputListTextColor: $shade000 !default;
 $inputListBorder: $inputBorder !default;
 $inputListPadding: 0.5rem 0 !default;
 $inputListItemPadding: 0.5rem 1rem !default;
 $inputListItemBg: transparent !default;
-$inputListItemTextColor: $shade000 !default;
+$inputListItemTextColor: #000000ff !default;
 $inputListItemHoverBg: $hoverBg !default;
 $inputListItemTextHoverColor: $shade000 !default;
 $inputListItemBorder: 0 none !default;
@@ -352,14 +365,14 @@ $passwordMediumBg: #ffe082 !default;
 $passwordStrongBg: #c5e1a5 !default;
 
 //button
-$buttonPadding: 0.5rem 1rem !default;
+$buttonPadding: 0.8rem 1rem !default;
 $buttonIconOnlyWidth: 2.357rem !default;
 $buttonIconOnlyPadding: 0.5rem 0 !default;
 $buttonBg: $primaryColor !default;
 $buttonBgImg: linear-gradient(to bottom, $primaryLightColor, $primaryColor, $primaryColor, $primaryDarkColor) !default;
 $buttonTextColor: $primaryTextColor !default;
 $buttonBorder: 0 !default;
-$buttonHoverBg: $primaryDarkColor !default;
+$buttonHoverBg: $primaryLightColor !default;
 $buttonHoverBgImg: linear-gradient(
   to top,
   $primaryLightColor,
