@@ -1,6 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
+import { useJsApiLoader, GoogleMap, MarkerF, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
+
+import { Button } from "primereact/button";
 import Product from "../../components/Product";
 
 interface Category {
@@ -22,7 +25,7 @@ const Options: React.FC = () => {
   const [products, setProdutcs] = useState<Products[]>([
     { id: "1", name: "Pizza", value: 20 },
     {
-      id: "1",
+      id: "2",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -30,7 +33,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "3",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -38,7 +41,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "4",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -46,7 +49,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "5",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -54,7 +57,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "6",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -62,7 +65,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "7",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -70,7 +73,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "8",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -78,7 +81,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "9",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -86,7 +89,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "10",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -94,7 +97,7 @@ const Options: React.FC = () => {
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
     },
     {
-      id: "1",
+      id: "11",
       name: "Pizza",
       value: 19.9,
       description: "descrição",
@@ -103,7 +106,53 @@ const Options: React.FC = () => {
     },
   ]);
 
+  const [center, setCenter] = useState({} as { lat: number; lng: number });
+
+  const [directionsResponse, setDirectionsResponse] = useState({} as google.maps.DirectionsResult);
+  const destinationRef = useRef<HTMLInputElement>(null);
+  const [distance, setDistance] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
+
   const onChangeCategories = useCallback(() => {}, []);
+
+  const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = useMemo(
+    () => ["places"],
+    []
+  );
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
+    libraries,
+  });
+
+  const calculateRoute = useCallback(async () => {
+    if (destinationRef.current === null || (destinationRef.current != null && destinationRef.current.value === "")) {
+      return;
+    }
+    setCenter({} as google.maps.LatLngLiteral);
+
+    // const directionsService = new google.maps.DirectionsService();
+    // const results = await directionsService.route({
+    //   origin: "UniNorte - Unidade 11",
+    //   destination: destinationRef.current.value,
+    //   unitSystem: google.maps.UnitSystem.METRIC,
+    //   travelMode: google.maps.TravelMode.DRIVING,
+    // });
+    // setDirectionsResponse(results);
+    // setDistance(`${results.routes[0].legs[0].distance?.text}`);
+    // setDuration(`${results.routes[0].legs[0]?.duration?.text}`);
+  }, []);
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition((e) => {
+      setCenter({ lat: e.coords.latitude, lng: e.coords.longitude });
+    });
+  }, []);
+
+  if (!isLoaded) {
+    return <></>;
+  }
 
   return (
     <div className="grid grid-nogutter col-12 mt-3 options-content">
@@ -154,8 +203,41 @@ const Options: React.FC = () => {
       <div className="options">
         <div className="flex col-offset-1 col-11 flex-wrap">
           {products.map((p) => (
-            <Product product={p} />
+            <Product key={p.id} product={p} />
           ))}
+        </div>
+      </div>
+
+      <div className="col-offset-1 col-10">
+        <div className="search-location">
+          <span>Selecione onde o pedido deve ser entregue:</span>
+          {/* <div className="flex align-items-center" style={{ height: "38px" }}>
+            <Autocomplete className="autocomplete-google-container">
+              <input className="p-inputtext" type="text" placeholder="Origin" ref={destinationRef} />
+            </Autocomplete>
+            <Button icon="pi pi-search" onClick={() => calculateRoute()} />
+          </div> */}
+        </div>
+
+        <div className="google-maps-container">
+          <div className="estimative-container">
+            <span>Distancia: {distance}</span>
+            <span>Tempo estimado de espera: {duration}</span>
+          </div>
+          {/* <GoogleMap
+            center={center}
+            zoom={15}
+            mapContainerStyle={{ width: "100%", height: "100%" }}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+            }}
+          >
+            <MarkerF position={center} options={{ opacity: 0 }} />
+            {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
+          </GoogleMap> */}
         </div>
       </div>
     </div>
