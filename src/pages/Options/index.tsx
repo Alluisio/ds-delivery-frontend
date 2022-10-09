@@ -1,15 +1,107 @@
 import React, { useCallback, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
+import Product from "../../components/Product";
 
 interface Category {
   category: string;
+}
+
+export interface Products {
+  id: string;
+  name: string;
+  value: number;
+  description?: string;
+  image?: string;
 }
 
 const Options: React.FC = () => {
   const [categorySelected, setCategorySelected] = useState({} as Category);
   const [categories, setCategories] = useState<Category[]>([{ category: "a" }]);
   const [filterText, setFilterText] = useState<string>("");
+  const [products, setProdutcs] = useState<Products[]>([
+    { id: "1", name: "Pizza", value: 20 },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+    {
+      id: "1",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+    },
+  ]);
 
   const onChangeCategories = useCallback(() => {}, []);
 
@@ -53,14 +145,18 @@ const Options: React.FC = () => {
             <InputText
               value={filterText}
               onChange={(e) => setFilterText(e.target.value)}
-              placeholder="Buscar item"
+              placeholder="Buscar produto"
               style={{ width: "230px" }}
             />
           </span>
         </div>
       </div>
       <div className="options">
-        <></>
+        <div className="flex col-offset-1 col-11 flex-wrap">
+          {products.map((p) => (
+            <Product product={p} />
+          ))}
+        </div>
       </div>
     </div>
   );
