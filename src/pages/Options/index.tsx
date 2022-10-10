@@ -2,9 +2,11 @@ import React, { useCallback, useMemo, useRef, useState, useEffect } from "react"
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useJsApiLoader, GoogleMap, MarkerF, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
-
 import { Button } from "primereact/button";
+import _ from "lodash";
+
 import Product from "../../components/Product";
+import OrderProducts from "../../components/OrderProducts";
 
 interface Category {
   category: string;
@@ -112,8 +114,11 @@ const Options: React.FC = () => {
   const destinationRef = useRef<HTMLInputElement>(null);
   const [distance, setDistance] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
+  const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
 
   const onChangeCategories = useCallback(() => {}, []);
+
+  const handleSubmit = useCallback(() => {}, []);
 
   const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = useMemo(
     () => ["places"],
@@ -143,6 +148,41 @@ const Options: React.FC = () => {
     // setDistance(`${results.routes[0].legs[0].distance?.text}`);
     // setDuration(`${results.routes[0].legs[0]?.duration?.text}`);
   }, []);
+
+  const handleSelect = useCallback(
+    (id: string) => {
+      const indexOfProductInArrayOfSelectedProducts = selectedProducts.findIndex((sP) => sP.id === id);
+      const copyOfSelectedProducts = _.cloneDeep(selectedProducts);
+
+      if (indexOfProductInArrayOfSelectedProducts === -1) {
+        const productSelected = products.find((p) => p.id === id);
+        if (productSelected) {
+          copyOfSelectedProducts.push(productSelected);
+          setSelectedProducts(copyOfSelectedProducts);
+        }
+      } else {
+        copyOfSelectedProducts.splice(indexOfProductInArrayOfSelectedProducts, 1);
+        setSelectedProducts(copyOfSelectedProducts);
+      }
+    },
+    [products, selectedProducts]
+  );
+
+  const checkIsSelectedProduct = useCallback(
+    (id: string) => {
+      if (selectedProducts.find((sP) => sP.id === id)) {
+        return true;
+      }
+      return false;
+    },
+    [selectedProducts]
+  );
+
+  const totalValue = useCallback(() => {
+    return selectedProducts.reduce((sum, item) => {
+      return sum + item.value;
+    }, 0);
+  }, [selectedProducts]);
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((e) => {
@@ -203,7 +243,7 @@ const Options: React.FC = () => {
       <div className="options">
         <div className="flex col-offset-1 col-11 flex-wrap">
           {products.map((p) => (
-            <Product key={p.id} product={p} />
+            <Product key={p.id} product={p} onSelect={handleSelect} isSelected={checkIsSelectedProduct(p.id)} />
           ))}
         </div>
       </div>
@@ -240,6 +280,13 @@ const Options: React.FC = () => {
           </GoogleMap> */}
         </div>
       </div>
+
+      <OrderProducts
+        className="col-offset-1 col-10"
+        amount={selectedProducts.length}
+        totalPrice={totalValue()}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };
