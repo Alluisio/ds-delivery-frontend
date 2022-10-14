@@ -11,7 +11,7 @@
     "@types/node": "^16.11.59",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "axios": "^0.27.2",
+    "axios": "^1.1.2",
     "lodash": "^4.17.21",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",

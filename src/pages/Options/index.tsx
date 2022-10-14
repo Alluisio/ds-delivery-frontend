@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Product from "../../components/Product";
 import OrderProducts from "../../components/OrderProducts";
 import { useToast } from "../../hooks/toast";
+import api from "../../service/api";
 
 export interface Products {
   id: string;
@@ -74,192 +75,8 @@ const Options: React.FC = () => {
   const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
   const [filterText, setFilterText] = useState<string>("");
 
-  const [products, setProdutcs] = useState<Products[]>([
-    { id: "1", name: "Pizza", value: 20, category: "ACOMPANHAMENTOS" },
-    {
-      id: "2",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "BEBIDAS",
-    },
-    {
-      id: "3",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "CHURRASCO",
-    },
-    {
-      id: "4",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "COMBOS",
-    },
-    {
-      id: "5",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "GELADOS",
-    },
-    {
-      id: "6",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "SUSHI",
-    },
-    {
-      id: "7",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "SANDUICHES",
-    },
-    {
-      id: "8",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "RISOTO",
-    },
-    {
-      id: "9",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "PIZZA",
-    },
-    {
-      id: "10",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "PASTEL",
-    },
-    {
-      id: "11",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "MILK_SHAKES",
-    },
-  ]);
-  const [filtered, setFiltered] = useState<Products[]>([
-    { id: "1", name: "Pizza", value: 20, category: "ACOMPANHAMENTOS" },
-    {
-      id: "2",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "BEBIDAS",
-    },
-    {
-      id: "3",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "CHURRASCO",
-    },
-    {
-      id: "4",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "COMBOS",
-    },
-    {
-      id: "5",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "GELADOS",
-    },
-    {
-      id: "6",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "SUSHI",
-    },
-    {
-      id: "7",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "SANDUICHES",
-    },
-    {
-      id: "8",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "RISOTO",
-    },
-    {
-      id: "9",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "PIZZA",
-    },
-    {
-      id: "10",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "PASTEL",
-    },
-    {
-      id: "11",
-      name: "Pizza",
-      value: 19.9,
-      description: "descrição",
-      image:
-        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
-      category: "MILK_SHAKES",
-    },
-  ]);
+  const [products, setProdutcs] = useState<Products[]>([]);
+  const [filtered, setFiltered] = useState<Products[]>([]);
 
   const [center, setCenter] = useState({} as { lat: number; lng: number });
 
@@ -384,11 +201,19 @@ const Options: React.FC = () => {
     }, 0);
   }, [selectedProducts]);
 
-  useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition((e) => {
-      setCenter({ lat: e.coords.latitude, lng: e.coords.longitude });
-    });
+  const loadData = useCallback(() => {
+    api
+      .get("products")
+      .then(({ data }) => {
+        setProdutcs(data);
+        setFiltered(data);
+      })
+      .catch(() => {
+        showToast({ title: "Não foi possível carregar a listagem de produtos.", type: "error" });
+      });
+  }, [showToast]);
 
+  const loadDropdownData = useCallback(() => {
     setOptionsDropdown([
       { category: "TODOS", label: "Todos os produtos" },
       { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
@@ -406,6 +231,17 @@ const Options: React.FC = () => {
       { category: "RISOTO", label: "Risotos" },
     ]);
   }, []);
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition((e) => {
+      setCenter({ lat: e.coords.latitude, lng: e.coords.longitude });
+    });
+  }, []);
+
+  useEffect(() => {
+    loadData();
+    loadDropdownData();
+  }, [loadData, loadDropdownData]);
 
   if (!isLoaded) {
     return <></>;
