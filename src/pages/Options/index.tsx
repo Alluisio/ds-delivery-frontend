@@ -512,6 +512,7 @@ const Options: React.FC = () => {
         amount={selectedProducts.length}
         totalPrice={totalValue()}
         onSubmit={handleSubmit}
+        disableButton={selectedProducts.length <= 0}
       />
     </div>
   );

@@ -7,9 +7,10 @@ interface Props {
   totalPrice: number;
   onSubmit: () => void;
   className: string;
+  disableButton: boolean;
 }
 
-const OrderProducts: React.FC<Props> = ({ amount, totalPrice, onSubmit, className }) => {
+const OrderProducts: React.FC<Props> = ({ amount, totalPrice, onSubmit, className, disableButton }) => {
   return (
     <div className={`order-summary-container ${className}`}>
       <div className="order-summary-content">
@@ -23,7 +24,7 @@ const OrderProducts: React.FC<Props> = ({ amount, totalPrice, onSubmit, classNam
             VALOR TOTAL
           </span>
         </div>
-        <Button onClick={onSubmit} label="FAZER PEDIDO" />
+        <Button onClick={onSubmit} label="FAZER PEDIDO" disabled={disableButton} />
       </div>
     </div>
   );
