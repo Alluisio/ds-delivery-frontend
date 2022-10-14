@@ -5,8 +5,10 @@ import { useJsApiLoader, GoogleMap, MarkerF, Autocomplete, DirectionsRenderer } 
 import { Button } from "primereact/button";
 import _ from "lodash";
 
+import { useNavigate } from "react-router-dom";
 import Product from "../../components/Product";
 import OrderProducts from "../../components/OrderProducts";
+import { useToast } from "../../hooks/toast";
 
 interface Category {
   category: string;
@@ -21,6 +23,9 @@ export interface Products {
 }
 
 const Options: React.FC = () => {
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+
   const [categorySelected, setCategorySelected] = useState({} as Category);
   const [categories, setCategories] = useState<Category[]>([{ category: "a" }]);
   const [filterText, setFilterText] = useState<string>("");
@@ -118,7 +123,10 @@ const Options: React.FC = () => {
 
   const onChangeCategories = useCallback(() => {}, []);
 
-  const handleSubmit = useCallback(() => {}, []);
+  const handleSubmit = useCallback(() => {
+    showToast({ type: "success", title: "Seu pedido foi feito com sucesso!" });
+    navigate("/order/xx");
+  }, [navigate, showToast]);
 
   const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = useMemo(
     () => ["places"],

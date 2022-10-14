@@ -457,6 +457,40 @@
   display: block;
 }
 
+.container-main-order-success {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100%;
+}
+.container-main-order-success .content-left {
+  width: 50%;
+}
+.container-main-order-success .content-left .text-faca-pedido {
+  color: #263238;
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+.container-main-order-success .content-left .back-home {
+  background: transparent !important;
+  color: #FF5371 !important;
+}
+.container-main-order-success .content-left .p-button {
+  border: 2px solid #FF5371;
+}
+.container-main-order-success .content-left .text-escolha {
+  color: #9E9E9E;
+  font-size: 1.3rem;
+}
+.container-main-order-success .content-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+.container-main-order-success .content-right img {
+  width: 70%;
+}
+
 .p-autocomplete .p-autocomplete-loader {
   right: 0.5rem;
 }

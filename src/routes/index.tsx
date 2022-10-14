@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import Home from "../pages/Home";
 import Options from "../pages/Options";
+import OrderSucess from "../pages/OrderSuccess";
 import SignIn from "../pages/SignInPage";
 
 // import SignIn from "../pages/SignInPage";
@@ -20,6 +21,7 @@ const RoutesComponent: React.FC = () => {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/options" element={<Options />} />
+            <Route path="/order/:id" element={<OrderSucess />} />
           </>
         );
       }

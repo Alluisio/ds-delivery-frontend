@@ -16,7 +16,7 @@ const Home: React.FC = () => {
         <Button
           label="FAZER PEDIDO"
           onClick={() => {
-            navigate("options");
+            navigate("/options");
           }}
         />
       </div>
