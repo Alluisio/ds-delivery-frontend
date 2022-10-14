@@ -1046,8 +1046,8 @@
   border-radius: 0;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  color: rgba(144, 202, 249, 0.16);
-  background: rgba(255, 255, 255, 0.87);
+  color: #ffffff;
+  background: #737373;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
   color: #ffffff;

@@ -10,27 +10,72 @@ import Product from "../../components/Product";
 import OrderProducts from "../../components/OrderProducts";
 import { useToast } from "../../hooks/toast";
 
-interface Category {
-  category: string;
-}
-
 export interface Products {
   id: string;
   name: string;
   value: number;
   description?: string;
   image?: string;
+  category: Categories;
+}
+
+export type Categories =
+  | "TODOS"
+  | "PIZZA"
+  | "SANDUICHES"
+  | "ACOMPANHAMENTOS"
+  | "BEBIDAS"
+  | "MILK_SHAKES"
+  | "COMBOS"
+  | "SUSHI"
+  | "PASTEL"
+  | "KIKAO"
+  | "MASSAS"
+  | "RISOTO"
+  | "CHURRASCO"
+  | "GELADOS";
+
+export interface CategoryElement {
+  label: string;
+  category: Categories;
+}
+
+export type CategoryMap = {
+  // eslint-disable-next-line no-unused-vars
+  [name in Categories]: CategoryElement;
+};
+
+export const categoriesMap: CategoryMap = {
+  TODOS: { category: "TODOS", label: "Todos os produtos" },
+  ACOMPANHAMENTOS: { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
+  CHURRASCO: { category: "CHURRASCO", label: "Churrascos" },
+  COMBOS: { category: "COMBOS", label: "Combos" },
+  GELADOS: { category: "GELADOS", label: "Gelados" },
+  KIKAO: { category: "KIKAO", label: "Kikães" },
+  MASSAS: { category: "MASSAS", label: "Massas" },
+  MILK_SHAKES: { category: "MILK_SHAKES", label: "Milk Shakes" },
+  PASTEL: { category: "PASTEL", label: "Pasteis" },
+  PIZZA: { category: "PIZZA", label: "Pizzas" },
+  BEBIDAS: { category: "BEBIDAS", label: "Bebidas" },
+  SANDUICHES: { category: "SANDUICHES", label: "Sanduíches" },
+  SUSHI: { category: "SUSHI", label: "Sushis" },
+  RISOTO: { category: "RISOTO", label: "Risotos" },
+};
+
+interface DropdownResponse {
+  data: { type: Categories }[];
 }
 
 const Options: React.FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
 
-  const [categorySelected, setCategorySelected] = useState({} as Category);
-  const [categories, setCategories] = useState<Category[]>([{ category: "a" }]);
+  const [value, setValue] = useState<CategoryElement | undefined>();
+  const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
   const [filterText, setFilterText] = useState<string>("");
+
   const [products, setProdutcs] = useState<Products[]>([
-    { id: "1", name: "Pizza", value: 20 },
+    { id: "1", name: "Pizza", value: 20, category: "ACOMPANHAMENTOS" },
     {
       id: "2",
       name: "Pizza",
@@ -38,6 +83,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "BEBIDAS",
     },
     {
       id: "3",
@@ -46,6 +92,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "CHURRASCO",
     },
     {
       id: "4",
@@ -54,6 +101,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "COMBOS",
     },
     {
       id: "5",
@@ -62,6 +110,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "GELADOS",
     },
     {
       id: "6",
@@ -70,6 +119,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "SUSHI",
     },
     {
       id: "7",
@@ -78,6 +128,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "SANDUICHES",
     },
     {
       id: "8",
@@ -86,6 +137,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "RISOTO",
     },
     {
       id: "9",
@@ -94,6 +146,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "PIZZA",
     },
     {
       id: "10",
@@ -102,6 +155,7 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "PASTEL",
     },
     {
       id: "11",
@@ -110,6 +164,100 @@ const Options: React.FC = () => {
       description: "descrição",
       image:
         "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "MILK_SHAKES",
+    },
+  ]);
+  const [filtered, setFiltered] = useState<Products[]>([
+    { id: "1", name: "Pizza", value: 20, category: "ACOMPANHAMENTOS" },
+    {
+      id: "2",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "BEBIDAS",
+    },
+    {
+      id: "3",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "CHURRASCO",
+    },
+    {
+      id: "4",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "COMBOS",
+    },
+    {
+      id: "5",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "GELADOS",
+    },
+    {
+      id: "6",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "SUSHI",
+    },
+    {
+      id: "7",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "SANDUICHES",
+    },
+    {
+      id: "8",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "RISOTO",
+    },
+    {
+      id: "9",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "PIZZA",
+    },
+    {
+      id: "10",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "PASTEL",
+    },
+    {
+      id: "11",
+      name: "Pizza",
+      value: 19.9,
+      description: "descrição",
+      image:
+        "https://s.yimg.com/ny/api/res/1.2/SEMowe8X4DsmdX7uum7gYg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4Mw--/https://s.yimg.com/os/creatr-uploaded-images/2021-10/c5fd29a0-2b9f-11ec-b3ff-30a01d58d24a",
+      category: "MILK_SHAKES",
     },
   ]);
 
@@ -120,8 +268,6 @@ const Options: React.FC = () => {
   const [distance, setDistance] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
-
-  const onChangeCategories = useCallback(() => {}, []);
 
   const handleSubmit = useCallback(() => {
     showToast({ type: "success", title: "Seu pedido foi feito com sucesso!" });
@@ -186,6 +332,52 @@ const Options: React.FC = () => {
     [selectedProducts]
   );
 
+  const filterData = useCallback(
+    (filter: string) => {
+      if (products) {
+        setFiltered(
+          products.filter((p) => {
+            if (value?.category !== "TODOS") {
+              return (
+                (p.description?.toString().toLowerCase().includes(filter.toLowerCase()) ||
+                  p.name.toString().toLowerCase().includes(filter.toLowerCase())) &&
+                (typeof value === "undefined" ? true : p.category === value?.category)
+              );
+            }
+            return (
+              p.description?.toString().toLowerCase().includes(filter.toLowerCase()) ||
+              p.name.toString().toLowerCase().includes(filter.toLowerCase())
+            );
+          })
+        );
+      }
+    },
+    [products, value]
+  );
+
+  const filterDataWithDropdown = useCallback(
+    (filter: string) => {
+      if (products) {
+        setFiltered(
+          products.filter((p) => {
+            if (filter !== "TODOS") {
+              return (
+                (p.description?.toString().toLowerCase().includes(filterText.toLowerCase()) ||
+                  p.name.toString().toLowerCase().includes(filterText.toLowerCase())) &&
+                p.category === filter
+              );
+            }
+            return (
+              p.description?.toString().toLowerCase().includes(filterText.toLowerCase()) ||
+              p.name.toString().toLowerCase().includes(filterText.toLowerCase())
+            );
+          })
+        );
+      }
+    },
+    [products, filterText]
+  );
+
   const totalValue = useCallback(() => {
     return selectedProducts.reduce((sum, item) => {
       return sum + item.value;
@@ -196,6 +388,23 @@ const Options: React.FC = () => {
     window.navigator.geolocation.getCurrentPosition((e) => {
       setCenter({ lat: e.coords.latitude, lng: e.coords.longitude });
     });
+
+    setOptionsDropdown([
+      { category: "TODOS", label: "Todos os produtos" },
+      { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
+      { category: "CHURRASCO", label: "Churrascos" },
+      { category: "COMBOS", label: "Combos" },
+      { category: "GELADOS", label: "Gelados" },
+      { category: "KIKAO", label: "Kikães" },
+      { category: "MASSAS", label: "Massas" },
+      { category: "MILK_SHAKES", label: "Milk Shakes" },
+      { category: "PASTEL", label: "Pasteis" },
+      { category: "PIZZA", label: "Pizzas" },
+      { category: "BEBIDAS", label: "Bebidas" },
+      { category: "SANDUICHES", label: "Sanduíches" },
+      { category: "SUSHI", label: "Sushis" },
+      { category: "RISOTO", label: "Risotos" },
+    ]);
   }, []);
 
   if (!isLoaded) {
@@ -227,10 +436,16 @@ const Options: React.FC = () => {
         </div>
         <div className="dropdown-container">
           <Dropdown
-            value={categorySelected}
-            options={categories}
-            onChange={onChangeCategories}
-            optionLabel="category"
+            value={value || ""}
+            options={optionsDropdown}
+            onChange={(e) => {
+              const optionSelected = optionsDropdown.find((o) => o.label === e.target.value.label);
+              if (optionSelected) {
+                setValue(optionSelected);
+                filterDataWithDropdown(optionSelected.category);
+              }
+            }}
+            optionLabel="label"
             placeholder="Categoria"
             emptyMessage="Nenhuma categoria encontrada"
             style={{ width: "230px" }}
@@ -241,7 +456,10 @@ const Options: React.FC = () => {
             <i className="pi pi-search" />
             <InputText
               value={filterText}
-              onChange={(e) => setFilterText(e.target.value)}
+              onChange={(e) => {
+                setFilterText(e.target.value);
+                filterData(e.target.value);
+              }}
               placeholder="Buscar produto"
               style={{ width: "230px" }}
             />
@@ -250,7 +468,7 @@ const Options: React.FC = () => {
       </div>
       <div className="options">
         <div className="flex col-offset-1 col-11 flex-wrap">
-          {products.map((p) => (
+          {filtered.map((p) => (
             <Product key={p.id} product={p} onSelect={handleSelect} isSelected={checkIsSelectedProduct(p.id)} />
           ))}
         </div>

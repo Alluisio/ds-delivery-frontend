@@ -99,8 +99,8 @@
             border-radius: $inputListItemBorderRadius;
 
             &.p-highlight {
-                color: $highlightTextColor;
-                background: $highlightBg;
+                color: $inputListItemTextHoverColor;
+                background: $inputListItemHoverBg;
             }
 
             &:not(.p-highlight):not(.p-disabled):hover {
