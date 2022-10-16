@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useState, useMemo } from "react";
+import api from "../service/api";
 
 interface ResponseLogin {
   uuid: string;
@@ -50,14 +51,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
+      const response = await api.post<ResponseLogin>("auth/login", {
+        username: email,
+        password,
+      });
+
       updateLastLoginCredential(email);
-      const userFake: ResponseLogin = { uuid: "1", nome: "Fake user", email: "fake@fake.com" };
-      // eslint-disable-next-line no-console
-      console.log(email, password);
 
-      localStorage.setItem("@DsDelivery: user", JSON.stringify(userFake));
+      const dataSignIn = response.data;
 
-      setData({ user: userFake });
+      console.log(dataSignIn);
     },
     [updateLastLoginCredential]
   );
