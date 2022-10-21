@@ -29,7 +29,7 @@ const Product: React.FC<Props> = ({ product, onSelect, isSelected }) => {
         )}
       </div>
       <span className="card-value-text">
-        {product.value.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
+        {parseFloat(product.value).toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
       </span>
       <div className="card-description-container">
         <span>Descrição</span>

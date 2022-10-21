@@ -7,6 +7,7 @@ import { Password } from "primereact/password";
 import { Message } from "primereact/message";
 import * as Yup from "yup";
 
+import { useNavigate } from "react-router-dom";
 import getValidationErrors from "../../utils/getValidationErrors";
 
 import Loading from "../../components/Loading";
@@ -34,6 +35,7 @@ const SignIn: React.FC = () => {
   const [erroPassword, setErroPassword] = useState<string | undefined>("");
 
   // const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -79,7 +81,7 @@ const SignIn: React.FC = () => {
         localStorage.setItem("@Balandrau: Theme", "dark");
       }
 
-      window.location.href = "/";
+      navigate("/");
     } catch (err: any) {
       if (err.response) {
         if (

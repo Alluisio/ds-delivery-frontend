@@ -1,14 +1,17 @@
 import React, { createContext, useCallback, useContext, useState, useMemo } from "react";
 import api from "../service/api";
 
-interface ResponseLogin {
+interface UserDTO {
+  id: number;
   uuid: string;
-  nome: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
   email: string;
 }
 
 interface AuthState {
-  user: ResponseLogin;
+  user: UserDTO;
 }
 
 interface SingInCredentials {
@@ -17,7 +20,7 @@ interface SingInCredentials {
 }
 
 interface AuthContextDate {
-  user: ResponseLogin;
+  user: UserDTO;
   // eslint-disable-next-line no-unused-vars
   signIn(credentials: SingInCredentials): Promise<void>;
   signOut(): void;
@@ -51,16 +54,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
-      const response = await api.post<ResponseLogin>("auth/login", {
+      const response = await api.post<UserDTO>("auth/login", {
         username: email,
         password,
       });
+
+      let usuario = {} as UserDTO;
 
       updateLastLoginCredential(email);
 
       const dataSignIn = response.data;
 
-      console.log(dataSignIn);
+      if (dataSignIn.id) {
+        usuario = dataSignIn;
+      }
+
+      // const token = response.headers.authorization;
+      // const decoded: TokenProps = jwtDecode(token);
+
+      // const user = decoded.auth.usuario;
+
+      // localStorage.setItem("@Balandrau: token", token);
+      localStorage.setItem("@DsDelivery: user", JSON.stringify(usuario));
+
+      // api.defaults.headers.authorization = `Bearer ${token}`;
+
+      setData({ user: usuario });
     },
     [updateLastLoginCredential]
   );

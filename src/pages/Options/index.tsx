@@ -10,11 +10,12 @@ import Product from "../../components/Product";
 import OrderProducts from "../../components/OrderProducts";
 import { useToast } from "../../hooks/toast";
 import api from "../../service/api";
+import { useAuth } from "../../hooks/auth";
 
 export interface Products {
   id: string;
   name: string;
-  value: number;
+  value: string;
   description?: string;
   image?: string;
   category: Categories;
@@ -70,6 +71,7 @@ interface DropdownResponse {
 const Options: React.FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { user } = useAuth();
 
   const [value, setValue] = useState<CategoryElement | undefined>();
   const [optionsDropdown, setOptionsDropdown] = useState<CategoryElement[]>([]);
@@ -87,9 +89,27 @@ const Options: React.FC = () => {
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
 
   const handleSubmit = useCallback(() => {
-    showToast({ type: "success", title: "Seu pedido foi feito com sucesso!" });
-    navigate("/order/xx");
-  }, [navigate, showToast]);
+    api
+      .post("orders", {
+        userId: user.id,
+        productsSelected: selectedProducts.map((sP) => sP.id),
+      })
+      .then(({ data }) => {
+        showToast({
+          type: "success",
+          title: "Seu pedido foi feito com sucesso!",
+          description: `O seu pedido é o nº${data.id}`,
+        });
+        navigate(`/order/${data.id}`);
+      })
+      .catch(() => {
+        showToast({
+          type: "error",
+          title: "Não foi possível processar seu pedido.",
+          description: "Tente novamente mais tarde, ou entre em contato com um administrador.",
+        });
+      });
+  }, [navigate, selectedProducts, showToast, user.id]);
 
   const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = useMemo(
     () => ["places"],
@@ -197,7 +217,7 @@ const Options: React.FC = () => {
 
   const totalValue = useCallback(() => {
     return selectedProducts.reduce((sum, item) => {
-      return sum + item.value;
+      return sum + parseFloat(item.value);
     }, 0);
   }, [selectedProducts]);
 
