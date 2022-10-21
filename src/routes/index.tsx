@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import MainContainer from "../components/MainContainer";
+import { useAuth } from "../hooks/auth";
 import Home from "../pages/Home";
 import Options from "../pages/Options";
 import OrderSucess from "../pages/OrderSuccess";
@@ -12,7 +13,7 @@ import SignIn from "../pages/SignInPage";
 // import Page404 from "../pages/404Page";
 
 const RoutesComponent: React.FC = () => {
-  const [user] = useState<string | null>(localStorage.getItem("@DsDelivery: user"));
+  const { user } = useAuth();
 
   const showPagesProtected = useCallback(() => {
     if (window.location.pathname !== "/login") {
