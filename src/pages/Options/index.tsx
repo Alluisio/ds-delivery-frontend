@@ -64,6 +64,7 @@ export const categoriesMap: CategoryMap = {
   RISOTO: { category: "RISOTO", label: "Risotos" },
 };
 
+// eslint-disable-next-line no-unused-vars
 interface DropdownResponse {
   data: { type: Categories }[];
 }
@@ -128,16 +129,16 @@ const Options: React.FC = () => {
     }
     setCenter({} as google.maps.LatLngLiteral);
 
-    // const directionsService = new google.maps.DirectionsService();
-    // const results = await directionsService.route({
-    //   origin: "UniNorte - Unidade 11",
-    //   destination: destinationRef.current.value,
-    //   unitSystem: google.maps.UnitSystem.METRIC,
-    //   travelMode: google.maps.TravelMode.DRIVING,
-    // });
-    // setDirectionsResponse(results);
-    // setDistance(`${results.routes[0].legs[0].distance?.text}`);
-    // setDuration(`${results.routes[0].legs[0]?.duration?.text}`);
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: "UniNorte - Unidade 11",
+      destination: destinationRef.current.value,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+    setDirectionsResponse(results);
+    setDistance(`${results.routes[0].legs[0].distance?.text}`);
+    setDuration(`${results.routes[0].legs[0]?.duration?.text}`);
   }, []);
 
   const handleSelect = useCallback(
@@ -333,12 +334,12 @@ const Options: React.FC = () => {
       <div className="col-offset-1 col-10">
         <div className="search-location">
           <span>Selecione onde o pedido deve ser entregue:</span>
-          {/* <div className="flex align-items-center" style={{ height: "38px" }}>
+          <div className="flex align-items-center" style={{ height: "38px" }}>
             <Autocomplete className="autocomplete-google-container">
               <input className="p-inputtext" type="text" placeholder="Origin" ref={destinationRef} />
             </Autocomplete>
             <Button icon="pi pi-search" onClick={() => calculateRoute()} />
-          </div> */}
+          </div>
         </div>
 
         <div className="google-maps-container">
@@ -346,7 +347,7 @@ const Options: React.FC = () => {
             <span>Distancia: {distance}</span>
             <span>Tempo estimado de espera: {duration}</span>
           </div>
-          {/* <GoogleMap
+          <GoogleMap
             center={center}
             zoom={15}
             mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -359,7 +360,7 @@ const Options: React.FC = () => {
           >
             <MarkerF position={center} options={{ opacity: 0 }} />
             {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
-          </GoogleMap> */}
+          </GoogleMap>
         </div>
       </div>
 
