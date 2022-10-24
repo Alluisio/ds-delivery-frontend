@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useCallback, useEffect, useState } from "react";
 // import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
@@ -7,7 +9,10 @@ import { Password } from "primereact/password";
 import { Message } from "primereact/message";
 import * as Yup from "yup";
 
+import { validate as validEmail } from "email-validator";
+
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
 import getValidationErrors from "../../utils/getValidationErrors";
 
 import Loading from "../../components/Loading";
@@ -18,6 +23,8 @@ import packageJson from "../../../package.json";
 // import logoNome from "../../assets/img/balandrau-logo-nome.svg";
 import background from "../../assets/img/sign-in-background.png";
 import logo from "../../assets/img/entregador.svg";
+import api from "../../service/api";
+import { useToast } from "../../hooks/toast";
 
 type SignInFormData = {
   email: string;
@@ -25,6 +32,7 @@ type SignInFormData = {
 };
 
 const SignIn: React.FC = () => {
+  const { showToast } = useToast();
   const { version } = packageJson;
   const { signIn, lastLoginCredential } = useAuth();
   const [emailValue, setEmailValue] = useState(lastLoginCredential || "");
@@ -33,6 +41,13 @@ const SignIn: React.FC = () => {
   const [load, setLoad] = useState(false);
   const [erroEmail, setErroEmail] = useState<string | undefined>("");
   const [erroPassword, setErroPassword] = useState<string | undefined>("");
+
+  const [createUser, setCreateUser] = useState(false);
+
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   // const history = useHistory();
   const navigate = useNavigate();
@@ -137,57 +152,214 @@ const SignIn: React.FC = () => {
     }
   }
 
+  const validCreateAccount = useCallback(() => {
+    if (_.isEmpty(firstName) || _.isEmpty(lastName) || _.isEmpty(email) || _.isEmpty(password) || !validEmail(email)) {
+      return false;
+    }
+    return true;
+  }, [email, firstName, lastName, password]);
+
+  const resetFieldsCreateAccount = useCallback(() => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+  }, []);
+
+  const handleCreateAccount = useCallback(() => {
+    if (validCreateAccount()) {
+      api
+        .post("auth/create-account", {
+          firstName,
+          lastName,
+          email,
+          password,
+        })
+        .then(() => {
+          resetFieldsCreateAccount();
+          setCreateUser(false);
+          showToast({
+            type: "success",
+            title: "Sua conta foi criada com sucesso",
+            description: "Faça login com os dados informados",
+          });
+        })
+        .catch((err) => {
+          if (err.response.data.message === "E-mail já cadastrado.") {
+            return;
+          }
+
+          showToast({
+            type: "error",
+            title: "Não foi possível criar conta",
+            description: "Tente novamente ou entre em contato com os administradores",
+          });
+        });
+    }
+  }, [email, firstName, lastName, password, resetFieldsCreateAccount, showToast, validCreateAccount]);
+
   return (
     <div className="signin-container">
       <img className="signin-background-image" src={background} alt="Imagem contendo alguns lanches" />
       <div className="signin-content">
         <div className="animationContainer">
-          <div className="flex content-login">
-            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-              <img src={logo} alt="logo do projeto" />
-              <div className="mb-6">
-                <h3 className="text-center">LOGIN</h3>
-              </div>
+          {!createUser ? (
+            <div className="flex content-login">
+              <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                <img src={logo} alt="logo do projeto" />
+                <div className="mb-6">
+                  <h3 className="text-center">LOGIN</h3>
+                </div>
 
-              <span className="p-float-label">
-                <InputText
-                  {...register("email", { required: "Informe um E-mail, CIM ou CPF." })}
-                  id="email"
-                  type="text"
-                  value={emailValue}
-                  onChange={(e) => {
-                    setEmailValue(e.target.value);
-                    setValue("email", e.target.value);
-                  }}
-                  className={errors.email && "p-invalid"}
-                  onKeyDown={(e) => handleEnter(e)}
-                />
-                <label htmlFor="username">E-mail ou username</label>
-              </span>
-              <div className="p-field" style={{ marginTop: 30 }}>
-                <span className="p-float-label p-input-icon-right ">
-                  <Password
-                    {...register("password", { required: "Informe uma Senha." })}
-                    id="password"
-                    toggleMask
-                    feedback={false}
-                    value={passwordValue}
+                <span className="p-float-label">
+                  <InputText
+                    {...register("email", { required: "Informe um E-mail, CIM ou CPF." })}
+                    id="email"
+                    type="text"
+                    value={emailValue}
                     onChange={(e) => {
-                      setPasswordValue(e.target.value);
-                      setValue("password", e.target.value);
+                      setEmailValue(e.target.value);
+                      setValue("email", e.target.value);
                     }}
-                    className={errors.password && "p-invalid"}
+                    className={errors.email && "p-invalid"}
+                    onKeyDown={(e) => handleEnter(e)}
                   />
-                  <label htmlFor="password">Senha</label>
+                  <label htmlFor="username">E-mail ou username</label>
                 </span>
-              </div>
+                <div className="p-field" style={{ marginTop: 30 }}>
+                  <span className="p-float-label p-input-icon-right ">
+                    <Password
+                      {...register("password", { required: "Informe uma Senha." })}
+                      id="password"
+                      toggleMask
+                      feedback={false}
+                      value={passwordValue}
+                      onChange={(e) => {
+                        setPasswordValue(e.target.value);
+                        setValue("password", e.target.value);
+                      }}
+                      className={errors.password && "p-invalid"}
+                    />
+                    <label htmlFor="password">Senha</label>
+                  </span>
+                </div>
 
-              <Button type="submit" className="mt-2 text-center flex justify-content-center">
-                <div style={{ width: "90%" }}>CONTINUAR</div>
-                {load && <Loading isLoading={load} size={10} color="#fff" />}
-              </Button>
-            </form>
-          </div>
+                <Button type="submit" className="mt-2 text-center flex justify-content-center">
+                  <div style={{ width: "90%" }}>CONTINUAR</div>
+                  {/* {load && <Loading isLoading={load} size={10} color="#fff" />} */}
+                </Button>
+
+                <div
+                  onClick={() => {
+                    setCreateUser(true);
+                  }}
+                  className="mt-2 flex align-items-center justify-content-end"
+                  style={{ width: "100%", cursor: "pointer" }}
+                >
+                  <span className="align-items-center">Ainda não sou cliente</span>
+                  <span className="pi pi-angle-right" style={{ marginTop: 1 }} />
+                </div>
+              </form>
+            </div>
+          ) : (
+            <div className="flex content-login">
+              <form className="p-fluid" autoComplete="off">
+                <img src={logo} alt="logo do projeto" />
+                <div className="mb-4">
+                  <h3 className="text-center">CRIAR CONTA</h3>
+                </div>
+
+                <div className="flex p-fluid mb-5">
+                  <span style={{ width: "100%" }} className="p-float-label mr-2">
+                    <InputText
+                      id="first-name"
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                        // setEmailValue(e.target.value);
+                        // setValue("email", e.target.value);
+                      }}
+                      // className={errors.emailCad && "p-invalid"}
+                      // onKeyDown={(e) => handleEnter(e)}
+                    />
+                    <label htmlFor="first-name">Nome</label>
+                  </span>
+
+                  <span style={{ width: "100%" }} className="p-float-label">
+                    <InputText
+                      id="last-name"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                        // setEmailValue(e.target.value);
+                        // setValue("email", e.target.value);
+                      }}
+                      // className={errors.emailCad && "p-invalid"}
+                      // onKeyDown={(e) => handleEnter(e)}
+                    />
+                    <label htmlFor="last-name">Sobrenome</label>
+                  </span>
+                </div>
+
+                <div className="mb-5">
+                  <span className="p-float-label">
+                    <InputText
+                      id="new-email"
+                      type="text"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        // setEmailValue(e.target.value);
+                        // setValue("email", e.target.value);
+                      }}
+                      // className={errors.emailCad && "p-invalid"}
+                    />
+                    <label htmlFor="new-email">Seu email</label>
+                  </span>
+                </div>
+
+                <div>
+                  <span className="p-float-label p-input-icon-right ">
+                    <Password
+                      id="new-password"
+                      type="new-password"
+                      toggleMask
+                      feedback={false}
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      autoComplete="false"
+                      className={errors.password && "p-invalid"}
+                    />
+                    <label htmlFor="new-password">Senha</label>
+                  </span>
+                </div>
+
+                <Button
+                  type="button"
+                  onClick={handleCreateAccount}
+                  className="mt-2 text-center flex justify-content-center"
+                >
+                  <div style={{ width: "90%" }}>CRIAR</div>
+                  {/* {load && <Loading isLoading={load} size={10} color="#fff" />} */}
+                </Button>
+
+                <div
+                  onClick={() => {
+                    setCreateUser(false);
+                  }}
+                  className="mt-2 flex align-items-center justify-content-start"
+                  style={{ width: "100%", cursor: "pointer" }}
+                >
+                  <span className="pi pi-angle-left" style={{ marginTop: 1 }} />
+                  <span className="align-items-center">Já sou cliente</span>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
 
         <div className="animationContainer link mb-3">
