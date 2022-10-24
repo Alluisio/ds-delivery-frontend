@@ -96,6 +96,13 @@
   align-items: stretch;
   font-family: "Lato", sans-serif;
 }
+.signin-container .errors-div {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  top: calc(100vh - 23%);
+}
 .signin-container .content-login {
   margin-top: -130px;
 }
@@ -501,13 +508,13 @@
   padding: 0.25rem 0.5rem;
 }
 .p-autocomplete .p-autocomplete-multiple-container:not(.p-disabled):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-autocomplete .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token {
   padding: 0.25rem 0;
@@ -569,7 +576,7 @@
   padding: 0.5rem;
   background: #343a40;
   color: #ffffff;
-  border: 0.5px solid #ced4da;
+  border: 0.5px solid #ffffff;
   border-radius: 7px;
 }
 .p-datepicker:not(.p-datepicker-inline) {
@@ -622,7 +629,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -761,19 +768,19 @@
   }
 }
 .p-cascadeselect {
-  background: #FF5371;
-  border: 0.5px solid #ced4da;
+  background: #4b4b4b;
+  border: 0.5px solid #ffffff;
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
   border-radius: 7px;
 }
 .p-cascadeselect:not(.p-disabled):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-cascadeselect:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-cascadeselect .p-cascadeselect-label {
   background: transparent;
@@ -852,7 +859,7 @@
 }
 .p-checkbox .p-checkbox-box {
   border: 2px solid #6c757d;
-  background: #FF5371;
+  background: #4b4b4b;
   width: 20px;
   height: 20px;
   color: #ffffff;
@@ -874,13 +881,13 @@
   color: #FFFFFF;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
   border-color: #a1253a;
@@ -908,13 +915,13 @@
   padding: 0.25rem 0.5rem;
 }
 .p-chips .p-chips-multiple-container:not(.p-disabled):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-chips .p-chips-multiple-container .p-chips-token {
   padding: 0.25rem 0.5rem;
@@ -959,27 +966,27 @@
 }
 
 .p-dropdown {
-  background: #FF5371;
-  border: 0.5px solid #ced4da;
+  background: #4b4b4b;
+  border: 0.5px solid #ffffff;
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
   border-radius: 7px;
   font-size: 0.9rem;
   height: 34px;
 }
 .p-dropdown:not(.p-disabled):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-dropdown:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-dropdown.p-dropdown-clearable .p-dropdown-label {
   padding-right: 1.5rem;
 }
 .p-dropdown .p-dropdown-label {
-  background: #FF5371;
+  background: #4b4b4b;
   border: 0 none;
 }
 .p-dropdown .p-dropdown-label.p-placeholder {
@@ -1130,7 +1137,7 @@
   border: 1px solid #6c757d;
 }
 .p-editor-container .p-editor-content .ql-editor {
-  background: #FF5371;
+  background: #4b4b4b;
   color: #ffffff;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -1171,14 +1178,14 @@
 .p-inputgroup-addon {
   background: #343a40;
   color: #e4e4e4;
-  border-top: 0.5px solid #ced4da;
-  border-left: 0.5px solid #ced4da;
-  border-bottom: 0.5px solid #ced4da;
+  border-top: 0.5px solid #ffffff;
+  border-left: 0.5px solid #ffffff;
+  border-bottom: 0.5px solid #ffffff;
   padding: 0.5rem 0.5rem;
   min-width: 2.357rem;
 }
 .p-inputgroup-addon:last-child {
-  border-right: 0.5px solid #ced4da;
+  border-right: 0.5px solid #ffffff;
 }
 
 .p-inputgroup > .p-component,
@@ -1288,9 +1295,9 @@
   font-family: "Lato", sans-serif;
   font-size: 0.8rem;
   color: #ffffff;
-  background: #FF5371;
+  background: #4b4b4b;
   padding: 0.5rem 0.5rem;
-  border: 0.5px solid #ced4da;
+  border: 0.5px solid #ffffff;
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
   appearance: none;
   border-radius: 7px;
@@ -1300,13 +1307,13 @@
   font-style: normal;
 }
 .p-inputtext:enabled:hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-inputtext:enabled:focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-inputtext.p-invalid.p-component {
   border-color: #e16565;
@@ -1391,7 +1398,7 @@
 .p-listbox {
   background: #f2f2f2;
   color: #ffffff;
-  border: 0.5px solid #ced4da;
+  border: 0.5px solid #ffffff;
   border-radius: 7px;
 }
 .p-listbox .p-listbox-header {
@@ -1444,19 +1451,19 @@
 }
 
 .p-multiselect {
-  background: #FF5371;
-  border: 0.5px solid #ced4da;
+  background: #4b4b4b;
+  border: 0.5px solid #ffffff;
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
   border-radius: 7px;
 }
 .p-multiselect:not(.p-disabled):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-multiselect:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 1.5rem;
@@ -1623,7 +1630,7 @@
 }
 .p-radiobutton .p-radiobutton-box {
   border: 2px solid #6c757d;
-  background: #FF5371;
+  background: #4b4b4b;
   width: 20px;
   height: 20px;
   color: #ffffff;
@@ -1631,13 +1638,13 @@
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s;
 }
 .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #FF6E86;
-  border-color: #FF5371;
+  border-color: #ffffff;
 }
 .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
   width: 12px;
@@ -5518,6 +5525,25 @@
   -moz-appearance: textfield;
 }
 
+.loader {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #FFF;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Add your customizations of the theme styles here */
 
 /*# sourceMappingURL=theme-dark.css.map */

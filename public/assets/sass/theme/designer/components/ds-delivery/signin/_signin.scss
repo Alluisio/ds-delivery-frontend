@@ -9,6 +9,14 @@
 
   font-family: $fontFamily;
 
+  .errors-div {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    top: calc(100vh - 23%);
+  }
+
   .content-login {
     margin-top: -130px;
   }

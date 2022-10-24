@@ -307,19 +307,19 @@ $actionIconBorderRadius: 50% !default;
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.5rem !default;
 $inputTextFontSize: 0.8rem !default;
-$inputBg: $primaryColor !default;
+$inputBg: $shade700 !default;
 $inputTextColor: $branco-puro !default;
 $inputIconColor: $branco-puro !default;
-$inputBorder: 0.5px solid $shade400 !default;
-$inputHoverBorderColor: $primaryColor !default;
-$inputFocusBorderColor: $primaryColor !default;
+$inputBorder: 0.5px solid $branco-puro !default;
+$inputHoverBorderColor: $branco-puro !default;
+$inputFocusBorderColor: $branco-puro !default;
 $inputErrorBorderColor: $errorColor !default;
 $inputPlaceholderTextColor: $branco-puro !default;
 $inputFilledBg: $shade600 !default;
 $inputFilledHoverBg: $inputFilledBg !default;
 $inputFilledFocusBg: $inputFilledBg !default;
 
-$bgDropdown: $primaryColor;
+$bgDropdown: $shade700;
 $dropdownPadding: 0.3rem 0.5rem !default;
 
 //balandrau datatable input border

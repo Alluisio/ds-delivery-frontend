@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
-import { Message } from "primereact/message";
 import * as Yup from "yup";
 
 import { validate as validEmail } from "email-validator";
@@ -19,8 +17,6 @@ import Loading from "../../components/Loading";
 import { useAuth } from "../../hooks/auth";
 import packageJson from "../../../package.json";
 
-// import logo from "../../assets/img/balandrau-logo.svg";
-// import logoNome from "../../assets/img/balandrau-logo-nome.svg";
 import background from "../../assets/img/sign-in-background.png";
 import logo from "../../assets/img/entregador.svg";
 import api from "../../service/api";
@@ -37,10 +33,8 @@ const SignIn: React.FC = () => {
   const { signIn, lastLoginCredential } = useAuth();
   const [emailValue, setEmailValue] = useState(lastLoginCredential || "");
   const [passwordValue, setPasswordValue] = useState("");
-  const [erroSignIn, setErroSignIn] = useState("");
   const [load, setLoad] = useState(false);
-  const [erroEmail, setErroEmail] = useState<string | undefined>("");
-  const [erroPassword, setErroPassword] = useState<string | undefined>("");
+  const [errorsState, setErrorsState] = useState<{ [key: string]: string }>({});
 
   const [createUser, setCreateUser] = useState(false);
 
@@ -49,7 +43,6 @@ const SignIn: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  // const history = useHistory();
   const navigate = useNavigate();
 
   const {
@@ -62,9 +55,9 @@ const SignIn: React.FC = () => {
   const onSubmit = async (data: SignInFormData) => {
     try {
       setLoad(true);
-      setErroSignIn("");
+      setErrorsState({});
       const schema = Yup.object().shape({
-        email: Yup.string().required("E-mail é obrigatório"),
+        email: Yup.string().required("E-mail é obrigatório").email("Insira um e-mail válido"),
         password: Yup.string().required("Senha obrigatória"),
       });
 
@@ -90,57 +83,30 @@ const SignIn: React.FC = () => {
         password: data.password,
       });
 
-      if (localStorage.getItem("@Balandrau: Theme")) {
+      if (localStorage.getItem("@DSDelivery: Theme")) {
         // return;
       } else {
-        localStorage.setItem("@Balandrau: Theme", "dark");
+        localStorage.setItem("@DSDelivery: Theme", "dark");
       }
 
       navigate("/");
     } catch (err: any) {
+      const errorsLocal: { [key: string]: string } = _.cloneDeep(errorsState);
+
       if (err.response) {
-        if (
-          err.response.data.titulo === "Usuário não encontrado." ||
-          err.response.data.titulo === "Usuário ou senha incorreto." ||
-          err.response.data.titulo === "E-mail não encontrado."
-        ) {
-          setErroSignIn("Credenciais incorretas.");
+        if (err.response.data.message === "E-mail não encontrado.") {
+          errorsLocal.credenciais = "Credenciais incorretas.";
         }
       } else if (err instanceof Yup.ValidationError) {
         const error = getValidationErrors(err);
-        setErroSignIn(error.email);
+        errorsLocal.email = error.email;
       } else {
-        setErroSignIn("Servidor indisponível, tente novamente mais tarde.");
+        errorsLocal.servidor = "Servidor indisponível, tente novamente mais tarde.";
       }
+      setErrorsState(errorsLocal);
     } finally {
       setLoad(false);
     }
-  };
-
-  useEffect(() => {
-    if (errors) setErroEmail(errors.email?.message);
-    if (errors) setErroPassword(errors.password?.message);
-  }, [errors, errors.email?.message, errors.password]);
-
-  // eslint-disable-next-line no-unused-vars
-  const showErro = (erro: string, onClose: (value: string) => void) => {
-    return (
-      <Message
-        className="p-mb-2"
-        severity="warn"
-        content={
-          <>
-            <i className="pi pi-times-circle" />
-            <span className="p-ml-2">{erro}</span>
-            <Button
-              icon="pi pi-times"
-              className="p-ml-2 p-button-text p-button-danger p-button-rounded signin-close-error-button"
-              onClick={() => onClose("")}
-            />
-          </>
-        }
-      />
-    );
   };
 
   function handleEnter(event: any) {
@@ -153,11 +119,31 @@ const SignIn: React.FC = () => {
   }
 
   const validCreateAccount = useCallback(() => {
-    if (_.isEmpty(firstName) || _.isEmpty(lastName) || _.isEmpty(email) || _.isEmpty(password) || !validEmail(email)) {
-      return false;
+    const errorsLocal: { [key: string]: string } = _.cloneDeep(errorsState);
+
+    if (_.isEmpty(firstName)) {
+      errorsLocal.firstNameCreate = "O campo nome é obrigatório";
     }
-    return true;
-  }, [email, firstName, lastName, password]);
+
+    if (_.isEmpty(lastName)) {
+      errorsLocal.lastNameCreate = "O campo sobrenome é obrigatório";
+    }
+
+    if (_.isEmpty(email)) {
+      errorsLocal.emailCreate = "O campo email é obrigatório";
+    }
+
+    if (!validEmail(email)) {
+      errorsLocal.emailCreate = "Insira um e-mail válido";
+    }
+
+    if (_.isEmpty(password)) {
+      errorsLocal.passwordCreate = "O campo senha é obrigatório";
+    }
+
+    setErrorsState(errorsLocal);
+    return _.isEmpty(errorsLocal);
+  }, [email, errorsState, firstName, lastName, password]);
 
   const resetFieldsCreateAccount = useCallback(() => {
     setFirstName("");
@@ -245,8 +231,7 @@ const SignIn: React.FC = () => {
                 </div>
 
                 <Button type="submit" className="mt-2 text-center flex justify-content-center">
-                  <div style={{ width: "90%" }}>CONTINUAR</div>
-                  {/* {load && <Loading isLoading={load} size={10} color="#fff" />} */}
+                  {load ? <Loading isLoading={load} /> : <div style={{ width: "90%" }}>CONTINUAR</div>}
                 </Button>
 
                 <div
@@ -277,11 +262,12 @@ const SignIn: React.FC = () => {
                       value={firstName}
                       onChange={(e) => {
                         setFirstName(e.target.value);
-                        // setEmailValue(e.target.value);
-                        // setValue("email", e.target.value);
+
+                        const errorsLocal = _.cloneDeep(errorsState);
+                        delete errorsLocal.firstNameCreate;
+                        setErrorsState(errorsLocal);
                       }}
-                      // className={errors.emailCad && "p-invalid"}
-                      // onKeyDown={(e) => handleEnter(e)}
+                      className={errorsState.firstNameCreate && "p-invalid"}
                     />
                     <label htmlFor="first-name">Nome</label>
                   </span>
@@ -293,11 +279,12 @@ const SignIn: React.FC = () => {
                       value={lastName}
                       onChange={(e) => {
                         setLastName(e.target.value);
-                        // setEmailValue(e.target.value);
-                        // setValue("email", e.target.value);
+
+                        const errorsLocal = _.cloneDeep(errorsState);
+                        delete errorsLocal.lastNameCreate;
+                        setErrorsState(errorsLocal);
                       }}
-                      // className={errors.emailCad && "p-invalid"}
-                      // onKeyDown={(e) => handleEnter(e)}
+                      className={errorsState.lastNameCreate && "p-invalid"}
                     />
                     <label htmlFor="last-name">Sobrenome</label>
                   </span>
@@ -311,10 +298,12 @@ const SignIn: React.FC = () => {
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
-                        // setEmailValue(e.target.value);
-                        // setValue("email", e.target.value);
+
+                        const errorsLocal = _.cloneDeep(errorsState);
+                        delete errorsLocal.emailCreate;
+                        setErrorsState(errorsLocal);
                       }}
-                      // className={errors.emailCad && "p-invalid"}
+                      className={errorsState.emailCreate && "p-invalid"}
                     />
                     <label htmlFor="new-email">Seu email</label>
                   </span>
@@ -330,9 +319,13 @@ const SignIn: React.FC = () => {
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
+
+                        const errorsLocal = _.cloneDeep(errorsState);
+                        delete errorsLocal.passwordCreate;
+                        setErrorsState(errorsLocal);
                       }}
                       autoComplete="false"
-                      className={errors.password && "p-invalid"}
+                      className={errorsState.passwordCreate && "p-invalid"}
                     />
                     <label htmlFor="new-password">Senha</label>
                   </span>
@@ -344,7 +337,6 @@ const SignIn: React.FC = () => {
                   className="mt-2 text-center flex justify-content-center"
                 >
                   <div style={{ width: "90%" }}>CRIAR</div>
-                  {/* {load && <Loading isLoading={load} size={10} color="#fff" />} */}
                 </Button>
 
                 <div
@@ -360,6 +352,12 @@ const SignIn: React.FC = () => {
               </form>
             </div>
           )}
+
+          <div className="errors-div">
+            <p className="error-message">{errorsState.credenciais}</p>
+            <p className="error-message">{errorsState.email}</p>
+            <p className="error-message">{errorsState.servidor}</p>
+          </div>
         </div>
 
         <div className="animationContainer link mb-3">
