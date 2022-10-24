@@ -1,0 +1,42 @@
+.menu-logout-container {
+  border-left: 1px solid $menuLogoutContainerBorderLine;
+  border-bottom: 1px solid $menuLogoutContainerBorderLine;
+  position: absolute !important;
+  right: 0;
+  top: 60px;
+  width: 200px;
+  background: $menuLogoutContainerBg;
+  color: $menuLogoutContainerColor;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  font-size: 12px;
+  padding: 13px;
+  z-index: 1;
+
+  animation-name: cssAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+
+  .linha-horizontal {
+    border-color: $menuLogoutContainerBorderLine;
+  }
+
+  .menu-logout-grau-irmao{
+    color: $cinza-texto-inativo
+  }
+}
+
+@keyframes cssAnimation {
+  from {
+    -webkit-transform: translateY(-100px);
+    -webkit-opacity: 0;
+
+  }
+  to {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+}

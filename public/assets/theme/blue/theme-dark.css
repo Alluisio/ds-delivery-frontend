@@ -498,6 +498,58 @@
   width: 70%;
 }
 
+.menu-logout-container {
+  border-left: 1px solid #707070;
+  border-bottom: 1px solid #707070;
+  position: absolute !important;
+  right: 0;
+  top: 60px;
+  width: 200px;
+  background: #FF5371;
+  color: #f8f4ea;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  font-size: 12px;
+  padding: 13px;
+  z-index: 1;
+  animation-name: cssAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.menu-logout-container .linha-horizontal {
+  border-color: #707070;
+}
+.menu-logout-container .menu-logout-grau-irmao {
+  color: #8d8d8d;
+}
+
+@keyframes cssAnimation {
+  from {
+    -webkit-transform: translateY(-100px);
+    -webkit-opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+}
+.simple-button {
+  display: flex;
+  flex: 1;
+}
+.simple-button > button {
+  display: flex;
+  flex: 1;
+  color: #f8f4ea !important;
+}
+.simple-button > button:hover {
+  color: #f8f4ea !important;
+  background: #FF6E86 !important;
+}
+
 .p-autocomplete .p-autocomplete-loader {
   right: 0.5rem;
 }
@@ -5402,12 +5454,11 @@
 }
 
 .avatar-container {
-  background: #e7cb77 0% 0% no-repeat padding-box;
-  color: #2e2e2e;
-  font-family: "Colonna MT", regular;
-  font-size: 2rem !important;
-  width: 48px !important;
-  height: 48px !important;
+  background: #263238;
+  color: #fff;
+  font-size: 1.3rem !important;
+  width: 36px !important;
+  height: 36px !important;
 }
 
 .debug-red {
@@ -5544,6 +5595,16 @@
     transform: rotate(360deg);
   }
 }
+.button-perfil {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
 /* Add your customizations of the theme styles here */
 
 /*# sourceMappingURL=theme-dark.css.map */

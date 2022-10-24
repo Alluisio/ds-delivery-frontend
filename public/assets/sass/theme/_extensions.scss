@@ -143,12 +143,12 @@
 }
 
 .avatar-container {
-  background: $avatarContainerBg;
-  color: $avatarContainerColor;
-  font-family: "Colonna MT", regular;
-  font-size: 2rem !important;
-  width: 48px !important;
-  height: 48px !important;
+  background: #263238;
+  color: #fff;
+  // font-family: "Colonna MT", regular;
+  font-size: 1.3rem !important;
+  width: 36px !important;
+  height: 36px !important;
 }
 
 .debug-red {
@@ -264,4 +264,14 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.button-perfil {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }

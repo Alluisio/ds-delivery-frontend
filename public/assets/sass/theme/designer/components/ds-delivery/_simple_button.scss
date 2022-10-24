@@ -1,0 +1,15 @@
+.simple-button {
+  display: flex;
+  flex: 1;
+
+  > button {
+    display: flex;
+    flex: 1;
+    color: $simpleButtonColor !important;
+
+    &:hover {
+      color: $simpleButtonColor !important;
+      background: $simpleButtonHoverBackground !important;
+    }
+  }
+}
