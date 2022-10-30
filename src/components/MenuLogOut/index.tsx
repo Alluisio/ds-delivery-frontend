@@ -1,14 +1,17 @@
 import React from "react";
 import { Avatar } from "primereact/avatar";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import SimpleButton from "../SimpleButton";
 
 interface Props {
   logoutCommand: () => void;
+  hiddenMenu: () => void;
 }
 
-const MenuLogOut: React.FC<Props> = ({ logoutCommand }) => {
+const MenuLogOut: React.FC<Props> = ({ logoutCommand, hiddenMenu }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="menu-logout-container">
@@ -27,7 +30,28 @@ const MenuLogOut: React.FC<Props> = ({ logoutCommand }) => {
           </div>
         </div>
         <hr className="p-my-3 linha-horizontal" />
-        <SimpleButton command={() => logoutCommand()} label="Sair" icon="pi pi-sign-out" />
+        <div className="flex align-items-center irmao-container">
+          <SimpleButton
+            command={() => {
+              navigate("/my-orders");
+              hiddenMenu();
+            }}
+          >
+            <div className="flex flex-row align-items-center">
+              <span className="material-icons-round">shopping_bag</span>
+              <span style={{ fontSize: 16 }}>Meus Pedidos</span>
+            </div>
+          </SimpleButton>
+        </div>
+        <hr className="p-my-3 linha-horizontal" />
+        <SimpleButton
+          command={() => {
+            logoutCommand();
+            hiddenMenu();
+          }}
+          label="Sair"
+          icon="pi pi-sign-out"
+        />
       </>
     </div>
   );

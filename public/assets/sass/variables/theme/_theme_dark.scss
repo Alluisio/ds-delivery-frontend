@@ -717,13 +717,13 @@ $paginatorElementPadding: 0 !default;
 //table
 $tableHeaderBorder: 1px solid $shade600 !default;
 $tableHeaderBorderWidth: 0 0 1px 0 !default;
-$tableHeaderBg: $shade800 !default;
+$tableHeaderBg: $shade600 !default;
 $tableHeaderTextColor: $shade100 !default;
 $tableHeaderFontWeight: 600 !default;
 $tableHeaderPadding: 0.6rem 0.6rem !default;
 
 $tableHeaderCellPadding: 0.6rem 0.6rem !default;
-$tableHeaderCellBg: $cinza-header-datatable !default;
+$tableHeaderCellBg: $shade600 !default;
 $tableHeaderCellTextColor: $shade000 !default;
 $tableHeaderCellFontWeight: 600 !default;
 $tableHeaderCellBorder: 1px solid $shade600 !default;
@@ -733,22 +733,22 @@ $tableHeaderCellTextHoverColor: $shade000 !default;
 $tableHeaderCellIconColor: $shade100 !default;
 $tableHeaderCellIconHoverColor: $shade000 !default;
 $tableHeaderCellHighlightBg: $cinza-header-datatable !default;
-$tableHeaderCellHighlightTextColor: $primaryColor !default;
+$tableHeaderCellHighlightTextColor: $primaryLightColor !default;
 $tableHeaderCellHighlightHoverBg: $cinza-header-datatable !default;
 $tableHeaderCellHighlightTextHoverColor: $primaryColor !default;
 $tableSortableColumnBadgeSize: 1.143rem !default;
 
-$tableBodyRowBg: $cinza-input !default;
-$tableBodyRowTextColor: $shade000 !default;
+$tableBodyRowBg: $shade100 !default;
+$tableBodyRowTextColor: $shade900 !default;
 $tableBodyRowEvenBg: $cinza-claro-striped-datatable !default;
 $tableBodyRowHoverBg: $hoverBg !default;
 $tableBodyRowTextHoverColor: $shade000 !default;
-$tableBodyCellBorder: 1px solid $shade600 !default;
+$tableBodyCellBorder: 1px solid $shade200 !default;
 $tableBodyCellBorderWidth: 0 0 1px 0 !default;
 $tableBodyCellPadding: 0.6rem 0.6rem !default;
 
 $tableFooterCellPadding: 0.6rem 0.6rem !default;
-$tableFooterCellBg: $shade800 !default;
+$tableFooterCellBg: $shade600 !default;
 $tableFooterCellTextColor: $shade000 !default;
 $tableFooterCellFontWeight: 600 !default;
 $tableFooterCellBorder: 1px solid $shade600 !default;
@@ -757,7 +757,7 @@ $tableResizerHelperBg: $primaryColor !default;
 
 $tableFooterBorder: 1px solid $shade600 !default;
 $tableFooterBorderWidth: 0 0 1px 0 !default;
-$tableFooterBg: $shade800 !default;
+$tableFooterBg: $shade600 !default;
 $tableFooterTextColor: $shade000 !default;
 $tableFooterFontWeight: 600 !default;
 $tableFooterPadding: 0.6rem 0.6rem !default;

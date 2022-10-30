@@ -74,7 +74,7 @@
         }
 
         &.p-highlight {
-            background: $tableHeaderCellHighlightBg;
+            // background: $tableHeaderCellHighlightBg;
             color: $tableHeaderCellHighlightTextColor;
 
             .p-sortable-column-icon {
@@ -82,7 +82,7 @@
             }
 
             &:hover {
-                background: $tableHeaderCellHighlightHoverBg;
+                // background: $tableHeaderCellHighlightHoverBg;
                 color: $tableHeaderCellHighlightTextColor;
     
                 .p-sortable-column-icon {
@@ -92,7 +92,7 @@
         }
 
         &:focus {
-            box-shadow: $inputListItemFocusShadow;
+            // box-shadow: $inputListItemFocusShadow;
             outline: 0 none;
         }
     }

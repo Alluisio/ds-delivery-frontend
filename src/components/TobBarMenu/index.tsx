@@ -66,7 +66,7 @@ const TopBarMenu: React.FC = () => {
         >
           <Avatar label={user.firstName[0]} className="avatar-container" size="normal" shape="circle" />
         </button>
-        {blMenu && <MenuLogOut logoutCommand={confirmLogOut} />}
+        {blMenu && <MenuLogOut logoutCommand={confirmLogOut} hiddenMenu={() => setBlMenu(false)} />}
       </div>
     </div>
   );
