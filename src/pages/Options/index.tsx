@@ -334,9 +334,12 @@ const Options: React.FC = () => {
       <div className="col-offset-1 col-10">
         <div className="search-location">
           <span>Selecione onde o pedido deve ser entregue:</span>
-          <div className="flex align-items-center" style={{ height: "38px" }}>
+          <div
+            className="flex align-items-center"
+            style={{ height: "38px", border: "1px solid var(--primary-color)", borderRadius: 7, overflow: "hidden" }}
+          >
             <Autocomplete className="autocomplete-google-container">
-              <input className="p-inputtext" type="text" placeholder="Origin" ref={destinationRef} />
+              <input className="p-inputtext" type="text" placeholder="Destino" ref={destinationRef} />
             </Autocomplete>
             <Button icon="pi pi-search" onClick={() => calculateRoute()} />
           </div>
@@ -369,7 +372,9 @@ const Options: React.FC = () => {
         amount={selectedProducts.length}
         totalPrice={totalValue()}
         onSubmit={handleSubmit}
-        disableButton={selectedProducts.length <= 0}
+        disableButton={
+          selectedProducts.length <= 0 || !destinationRef.current?.value || destinationRef.current.value === ""
+        }
       />
     </div>
   );
