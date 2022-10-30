@@ -235,23 +235,17 @@ const Options: React.FC = () => {
   }, [showToast]);
 
   const loadDropdownData = useCallback(() => {
-    setOptionsDropdown([
-      { category: "TODOS", label: "Todos os produtos" },
-      { category: "ACOMPANHAMENTOS", label: "Acompanhamentos" },
-      { category: "CHURRASCO", label: "Churrascos" },
-      { category: "COMBOS", label: "Combos" },
-      { category: "GELADOS", label: "Gelados" },
-      { category: "KIKAO", label: "Kikães" },
-      { category: "MASSAS", label: "Massas" },
-      { category: "MILK_SHAKES", label: "Milk Shakes" },
-      { category: "PASTEL", label: "Pasteis" },
-      { category: "PIZZA", label: "Pizzas" },
-      { category: "BEBIDAS", label: "Bebidas" },
-      { category: "SANDUICHES", label: "Sanduíches" },
-      { category: "SUSHI", label: "Sushis" },
-      { category: "RISOTO", label: "Risotos" },
-    ]);
-  }, []);
+    api
+      .get<Categories[]>("products/dropdown-category")
+      .then(({ data }) => {
+        const categories = data.map((c) => categoriesMap[c]);
+        categories.unshift({ category: "TODOS", label: "Todos os produtos" });
+        setOptionsDropdown(categories);
+      })
+      .catch(() => {
+        showToast({ type: "error", title: "Não foi possível carregar o dropdown de categorias" });
+      });
+  }, [showToast]);
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition((e) => {
